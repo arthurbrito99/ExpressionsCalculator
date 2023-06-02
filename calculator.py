@@ -11,9 +11,16 @@ def calcular(expressao):
     pilha_numeros = []
     pilha_operadores = []
 
-    for caractere in expressao:
+    i = 0
+    while i < len(expressao):
+        caractere = expressao[i]
         if caractere.isdigit():
-            pilha_numeros.append(int(caractere))
+            numero = ""
+            while i < len(expressao) and expressao[i].isdigit():
+                numero += expressao[i]
+                i += 1
+            pilha_numeros.append(int(numero))
+            continue
         elif caractere == '(':
             pilha_operadores.append(caractere)
         elif caractere == ')':
@@ -34,6 +41,8 @@ def calcular(expressao):
                 pilha_numeros.append(resultado)
             pilha_operadores.append(caractere)
 
+        i += 1
+
     while pilha_operadores:
         operador = pilha_operadores.pop()
         num2 = pilha_numeros.pop()
@@ -41,7 +50,7 @@ def calcular(expressao):
         resultado = executar_operacao(num1, num2, operador)
         pilha_numeros.append(resultado)
 
-    return pilha_numeros[0]
+    return int(pilha_numeros[0])
 
 
 def precedencia(operador):
@@ -68,12 +77,14 @@ def executar_operacao(num1, num2, operador):
         return num1 / num2
 
 
-if __name__ == "__main__":  
-    expressao = input("Digite a expressão (ou 'sair' para encerrar): ")
+if __name__ == "__main__":
+    while True:
+        expressao = input("Digite a expressão (ou 'sair' para encerrar): ")
 
-    while expressao.lower() != "sair":
+        if expressao.lower() == "sair":
+            print("Calculadora encerrada.")
+            break
+
         resultado = calcular(expressao)
         print("Resultado:", resultado)
         print("\n")
-
-        expressao = input("Digite a expressão (ou 'sair' para encerrar): ")
