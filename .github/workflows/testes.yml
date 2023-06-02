@@ -7,7 +7,10 @@ on:
 
 jobs:
   testes:
-    runs-on: windows-latest, ubuntu-latest, macos-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+        matrix:
+            os: [ubuntu-latest, windows-latest]
 
     steps:
       - name: Checkout do código
