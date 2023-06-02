@@ -19,4 +19,4 @@ jobs:
           python-version: 3.x
 
       - name: Executar testes
-        run: python -m unittest discover unit_test/
+        run: python -m unittest discover unit_tests/
