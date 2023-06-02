@@ -68,17 +68,12 @@ def executar_operacao(num1, num2, operador):
         return num1 / num2
 
 
-# Loop principal da calculadora
-while True:
+if __name__ == "__main__":  
     expressao = input("Digite a expressão (ou 'sair' para encerrar): ")
 
-    if expressao.lower() == "sair":
-        print("Calculadora encerrada.")
-        break
+    while expressao.lower() != "sair":
+        resultado = calcular(expressao)
+        print("Resultado:", resultado)
+        print("\n")
 
-    # Remove todos os espaços da expressão
-    expressao = expressao.replace(" ", "")
-    
-    resultado = calcular(expressao)
-    print("Resultado:", resultado)
-    print("\n")
+        expressao = input("Digite a expressão (ou 'sair' para encerrar): ")
